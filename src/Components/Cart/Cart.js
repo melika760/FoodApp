@@ -8,10 +8,10 @@ const ctx = useContext(CartContext);
 const totalAmount = ctx.totalAmount.toFixed(2);
 const HasItem = ctx.items.length>0;
 function RemoveHandler(id){
-
+ctx.removeItem(id)
 }
 function AddHandler(item){
-
+ctx.addItem({...item,amount:1})
 }
 const Mealitems= ctx.items.map(item=>{
     return(

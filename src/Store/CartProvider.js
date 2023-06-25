@@ -19,13 +19,30 @@ UpdatedItems=[...state.items];
 UpdatedItems[existingItemIndex]=UpdatedItem
         }else{
          UpdatedItems=state.items.concat(action.item)
-        }
-
-        
+        } 
 return{
     items:UpdatedItems,
     totalAmount:UpdateTotalAmount
 }
+    }
+    if(action.type==="REMOVE"){
+        const existingItemIndex=state.items.findIndex(item=>item.id===action.id)
+        const existingItem=state.items[existingItemIndex];
+        const UpdateTotalAmount=state.totalAmount-existingItem.price;
+        let UpdatedItems;
+        if(existingItem.amount===1){
+            UpdatedItems=state.items.filter(item=> item.id !== action.id);
+
+        }else{
+            const UpdatedItem= {...existingItem, amount:existingItem.amount-1};
+            UpdatedItems=[...state.items];
+            UpdatedItems[existingItemIndex]=UpdatedItem;
+        }
+
+        return{
+            items:UpdatedItems,
+            totalAmount:UpdateTotalAmount
+        }
     }
 return defaultState
 }
@@ -35,7 +52,7 @@ export default function CartProvider(props){
         dispatchCart({type:"ADD",item:item})
     };
     function RemovingItems(id){
-        dispatchCart({type:"ID",id:id})
+        dispatchCart({type:"REMOVE",id:id})
     };
     const cartContext={
     items:cartState.items,
