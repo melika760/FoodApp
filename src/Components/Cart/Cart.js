@@ -13,15 +13,16 @@ ctx.removeItem(id)
 function AddHandler(item){
 ctx.addItem({...item,amount:1})
 }
-const Mealitems= ctx.items.map(item=>{
+const Mealitems=<ul  className={styles[`cart-items`]}> {ctx.items.map(item=>{
     return(
+        
         <CartItem key={item.id} name={item.name} amount={item.amount} price={item.price}  onAdd={AddHandler.bind(null,item)} onRemove={RemoveHandler.bind(null,item.id) }/>
-    )
-})
+        )
+})}</ul>
     return(
     <Modal onClose={props.onClose}>
 {Mealitems}
-<div className={styles[`cart-items`]}>
+<div className={styles.total}>
 <span>Total Amount</span>
 <span>{totalAmount}</span>
 </div>
