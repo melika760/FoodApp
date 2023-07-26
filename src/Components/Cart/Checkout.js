@@ -1,4 +1,4 @@
-import classes from "./Checkout.module.css"
+import classes from "./Checkout.module.css";
 export default function Checkout(props){
     function confirmHandler(event){
         event.preventDefault()

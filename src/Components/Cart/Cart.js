@@ -24,7 +24,7 @@ const Mealitems=<ul  className={styles[`cart-items`]}> {ctx.items.map(item=>{
         <CartItem key={item.id} name={item.name} amount={item.amount} price={item.price}  onAdd={AddHandler.bind(null,item)} onRemove={RemoveHandler.bind(null,item.id) }/>
         )
 })}</ul>
-const actions=<div className={styles.actions}>
+const Modalactions=<div className={styles.actions}>
 <button className={styles[`button--alt`]} onClick={props.onClose}>Close</button>
 {HasItem && <button className={styles.button} onClick={checkform}>Order</button>}
 </div>
@@ -37,7 +37,7 @@ const actions=<div className={styles.actions}>
 </div>
 
 {ischeckout && <Checkout onCancel={props.onClose}/>}
-{!ischeckout && actions}
+{!ischeckout && Modalactions}
 
         </Modal>
     )
