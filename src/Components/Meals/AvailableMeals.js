@@ -1,34 +1,47 @@
-import styles from "./AvailableMeals.module.css"
+import React,{useEffect,useState} from "react";
+import styles from "./AvailableMeals.module.css";
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 export default function AvailableMeals(){
-    const DUMMY_MEALS = [
-        {
-          id: 'm1',
-          name: 'Sushi',
-          description: 'Finest fish and veggies',
-          price: 22.99,
-        },
-        {
-          id: 'm2',
-          name: 'Schnitzel',
-          description: 'A german specialty!',
-          price: 16.5,
-        },
-        {
-          id: 'm3',
-          name: 'Barbecue Burger',
-          description: 'American, raw, meaty',
-          price: 12.99,
-        },
-        {
-          id: 'm4',
-          name: 'Green Bowl',
-          description: 'Healthy...and green...',
-          price: 18.99,
-        },
-      ];
-      const MealItems= DUMMY_MEALS.map(MEAL=>{
+  const[meals,setmeals]=useState([]);
+  const[isloading,setisloading]=useState(true)
+  const[httperror,sethttperror]=useState()
+  useEffect(()=>{
+    const fetchmeal=async()=>{
+      const response = await fetch("https://foodapp-df071-default-rtdb.firebaseio.com/meals.json");
+      if(!response.ok){
+        throw new Error("something went wrong!")
+      }
+      const responseData =await response.json();
+      const loadedmeal=[];
+      for( const key in responseData){
+        loadedmeal.push({
+          id:key,
+          name:responseData[key].name,
+          price:responseData[key].price,
+          description:responseData[key].description
+        })
+        setmeals(loadedmeal);
+        setisloading(false)
+      }
+    }
+    fetchmeal().catch((error)=>{
+setisloading(false);
+sethttperror(error.message)
+    });
+    
+  },[])
+  if(isloading){
+    return(<section className={styles.mealLoad}>
+      <p>loading...</p>
+    </section>)
+  }
+  if(httperror){
+    return(<section className={styles.httpError}>
+      <p>{httperror}</p>
+    </section>)
+  }
+      const MealItems= meals.map(MEAL=>{
        return (<MealItem key={MEAL.id} name={MEAL.name} price={MEAL.price} description={MEAL.description} id={MEAL.id}/>)
       }) 
       return(

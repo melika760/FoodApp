@@ -1,3 +1,11 @@
+.mealLoad{
+  color: white;
+  text-align: center;
+}
+.httpError{
+  color: red;
+  text-align: center;
+}
 .meals {
     max-width: 60rem;
     width: 90%;
