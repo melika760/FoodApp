@@ -9,11 +9,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
+    padding: 0 1.5%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     z-index: 10;
     
   }
+ .head{
+  width: 50%;
+ 
+ }
   
   .main-image {
     width: 100%;
@@ -28,3 +32,8 @@
     object-fit: cover;
     transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
   }
+@media(max-width=500){
+.head{
+  width: 10%;
+}
+}

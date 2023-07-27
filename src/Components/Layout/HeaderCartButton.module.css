@@ -10,7 +10,8 @@
     align-items: center;
     border-radius: 25px;
     font-weight: bold;
-    margin-right: 200px
+    margin-right: 26px;
+  
   }
   
   .button:hover,
@@ -58,3 +59,10 @@
       transform: scale(1);
     }
   }
+  @media(max-width=700){
+
+    .button{
+     margin-right: 0px;
+    }
+      
+    }
