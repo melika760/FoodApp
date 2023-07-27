@@ -59,10 +59,18 @@
       transform: scale(1);
     }
   }
-  @media(max-width=700){
+  @media (max-width: 768px){
 
     .button{
-     margin-right: 0px;
+     margin-right: 5px;
+     padding: 0.25rem 1.2rem;
     }
-      
+    .icon {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-right: 0.3rem;
+    }
+    .badge{
+      margin-left: 0.5rem;
+    }
     }

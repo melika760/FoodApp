@@ -32,8 +32,8 @@
     object-fit: cover;
     transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
   }
-@media(max-width=500){
+  @media (max-width: 768px){
 .head{
-  width: 10%;
+  width: 20%;
 }
 }
