@@ -33,7 +33,7 @@
     transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
   }
   @media (max-width: 768px){
-.head{
-  width: 20%;
+.header{
+  padding: 0;
 }
 }
