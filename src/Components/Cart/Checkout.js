@@ -2,15 +2,18 @@
 import classes from "./Checkout.module.css";
 import useInput from "../../hook/use-input";
 export default function Checkout(props){
-  const {enteredvalue:firstName,hasError:firstNameHasError,Inputchangehandler:firstNameChangeHandler,bluredvalue:firstNameblured}=useInput(value=>value.trim()!=="")
-  const {enteredvalue:streetName,hasError:streetNameHasError,Inputchangehandler:streetNameChangeHandler,bluredvalue:streetNameblured}=useInput(value=>value.trim()!=="")
-  const {enteredvalue:postal,hasError:postalHasError,Inputchangehandler:postalChangeHandler,bluredvalue:postalblured}=useInput(value=>value.trim().length===6)
-  const {enteredvalue:cityName,hasError:cityNameHasError,Inputchangehandler:cityNameChangeHandler,bluredvalue:cityNameblured}=useInput(value=>value.trim()!=="")
+  const {enteredvalue:firstName,hasError:firstNameHasError,Inputchangehandler:firstNameChangeHandler,bluredvalue:firstNameblured ,valueIsvalid:firstNameValid}=useInput(value=>value.trim()!=="")
+  const {enteredvalue:streetName,hasError:streetNameHasError,Inputchangehandler:streetNameChangeHandler,bluredvalue:streetNameblured,valueIsvalid:streetNameValid}=useInput(value=>value.trim()!=="")
+  const {enteredvalue:postal,hasError:postalHasError,Inputchangehandler:postalChangeHandler,bluredvalue:postalblured,valueIsvalid:postalValid}=useInput(value=>value.trim().length===6)
+  const {enteredvalue:cityName,hasError:cityNameHasError,Inputchangehandler:cityNameChangeHandler,bluredvalue:cityNameblured,valueIsvalid:cityNameValid}=useInput(value=>value.trim()!=="")
+  
   function confirmHandler(event){
         event.preventDefault();
-        const formIsnotValid=firstNameHasError&&streetNameHasError&&cityNameHasError&&postalHasError
+   
+        const formIsnotValid=!firstNameValid&&!streetNameValid&&!cityNameValid&&!postalValid
         if(formIsnotValid){
-          return
+        
+          return;
         }
         props.onConfirm({
           firstName:firstName,
@@ -45,7 +48,7 @@ export default function Checkout(props){
           <button type='button' onClick={props.onCancel}>
             Cancel
           </button>
-          <button className={classes.submit}>Confirm</button>
+          <button className={classes.submit} >Confirm</button>
         </div>
       </form>)
 }

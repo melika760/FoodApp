@@ -11,6 +11,6 @@ function bluredvalue(){
     setistouched(true)
 }
 return{
-    enteredvalue,hasError,Inputchangehandler,bluredvalue
+    enteredvalue,hasError,valueIsvalid,Inputchangehandler,bluredvalue
 }
 }
