@@ -5,9 +5,24 @@ import CartItem from "./CartItem"
 import CartContext from "../../Store/cart-context"
 import Checkout from "./Checkout"
 export default function Cart(props){
-    const[ischeckout,setischeckout]=useState(false)
+    const[ischeckout,setischeckout]=useState(false);
+    const[isSubmitting,setISubmitting]=useState(false);
+    const[didSubmitt,setdidSubmit]=useState(false)
     function checkform(){
         setischeckout(true)
+    }
+    const ordersubmithandler=async(userData)=>{
+        setISubmitting(true)
+await fetch("https://foodapp-df071-default-rtdb.firebaseio.com/orders.json",{
+    method:"POST",
+    body:JSON.stringify({
+        use:userData,
+        orderedItems:ctx.items
+    })
+    
+})
+setISubmitting(false);
+setdidSubmit(true)
     }
 const ctx = useContext(CartContext);
 const totalAmount = ctx.totalAmount.toFixed(2);
@@ -28,16 +43,30 @@ const Modalactions=<div className={styles.actions}>
 <button className={styles[`button--alt`]} onClick={props.onClose}>Close</button>
 {HasItem && <button className={styles.button} onClick={checkform}>Order</button>}
 </div>
-    return(
-    <Modal onClose={props.onClose}>
-{Mealitems}
+const cartModalContent=<React.Fragment>{Mealitems}
 <div className={styles.total}>
 <span>Total Amount</span>
 <span>{totalAmount}</span>
 </div>
 
-{ischeckout && <Checkout onCancel={props.onClose}/>}
-{!ischeckout && Modalactions}
+{ischeckout && <Checkout onCancel={props.onClose} onConfirm={ordersubmithandler}/>}
+{!ischeckout && Modalactions}</React.Fragment>
+const isSubmittingcontent=<p>Sending Order Data</p>
+const DidSubmitContent=
+    <React.Fragment>
+      <p>Successfully sent the order!</p>
+      <div className={styles.actions}>
+      <button className={styles.button} onClick={props.onClose}>
+        Close
+      </button>
+    </div>
+    </React.Fragment>
+
+    return(
+    <Modal onClose={props.onClose}>
+{!isSubmitting && !didSubmitt && cartModalContent}
+{isSubmitting && isSubmittingcontent}
+{didSubmitt && DidSubmitContent}
 
         </Modal>
     )
