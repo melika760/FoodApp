@@ -44,6 +44,9 @@ return{
             totalAmount:UpdateTotalAmount
         }
     }
+    if(action.type==="CLEAR"){
+        return defaultState
+    }
 return defaultState
 }
 export default function CartProvider(props){
@@ -54,11 +57,15 @@ export default function CartProvider(props){
     function RemovingItems(id){
         dispatchCart({type:"REMOVE",id:id})
     };
+    function ClearCardHandler(){
+        dispatchCart({type:"CLEAR"})
+    }
     const cartContext={
     items:cartState.items,
     totalAmount: cartState.totalAmount,
     addItem:AddingItems,
-    removeItem:RemovingItems
+    removeItem:RemovingItems,
+    clearCard:ClearCardHandler,
     }
     return(
         <CartContext.Provider value={cartContext}>{props.children}</CartContext.Provider>

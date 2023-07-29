@@ -22,7 +22,8 @@ await fetch("https://foodapp-df071-default-rtdb.firebaseio.com/orders.json",{
     
 })
 setISubmitting(false);
-setdidSubmit(true)
+setdidSubmit(true);
+ctx.clearCard();
     }
 const ctx = useContext(CartContext);
 const totalAmount = ctx.totalAmount.toFixed(2);
